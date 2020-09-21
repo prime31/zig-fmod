@@ -1,0 +1,32 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Build Project",
+            "type": "shell",
+            // this one works, the others dont...
+            "command": "export DYLD_FALLBACK_LIBRARY_PATH=${workspaceFolder}/src/core/lib/ && zig build run",
+            "osx": {
+                "environment": [{"name": "DYLD_FALLBACK_LIBRARY_PATH", "value": "${workspaceFolder}/src/core/lib/"}],
+                "options": {
+                    "env": {
+                        "DYLD_LIBRARY_PATH": "${workspaceFolder}/src/core/lib/",
+                        "DYLD_FALLBACK_LIBRARY_PATH": "${workspaceFolder}/src/core/lib/",
+                    }
+                },
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "presentation": {
+                "clear": true
+            },
+        }
+    ]
+}
